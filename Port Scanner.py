@@ -1,8 +1,10 @@
-import os, socket
+import os, socket, requests, datetime, time
 
 
 
 
+
+#this is good but maybe can be fixed or integrated with another function 
 def services():
     message = (
         "Choose a service type:\n"
@@ -21,8 +23,20 @@ def services():
 
 
 
+hostname = socket.gethostname()
+hostip = socket.gethostbyname(hostname)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
+
+#need to fix this at the earliest chance
+for port in range(0, 20):#make the range for all possible ports 
+    s.connect((hostip, port))#this for some reason is not responding
+    print(s.getsockname()[0]) #dont know what this does anyway
+
+
+#main function will contain all the necassary componets for the program to work
+    #make sure to include time.sleep and date time to the thing
 def main():
     TITLE = """
 
@@ -43,6 +57,7 @@ def main():
     """
     print(TITLE)
     scan = services()
+    
     
     
     
