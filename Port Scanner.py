@@ -25,14 +25,18 @@ def services():
 
 hostname = socket.gethostname()
 hostip = socket.gethostbyname(hostname)
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s = socket.socket()
+ports_scan_log = 
 
 
-
-#need to fix this at the earliest chance
-for port in range(0, 20):#make the range for all possible ports 
-    s.connect((hostip, port))#this for some reason is not responding
-    print(s.getsockname()[0]) #dont know what this does anyway
+def scanner(target_IP, port):
+    s = socket.socket()
+    Result = s.connect_ex((target_IP, port))
+    if Result == 0:
+        s.close()
+        return print(f"port: {port} is open")
+    else:
+        return print(f"port: {port} is not open")
 
 
 #main function will contain all the necassary componets for the program to work
